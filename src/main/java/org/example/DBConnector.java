@@ -8,7 +8,7 @@ import java.sql.SQLException;
         private static final String USER = "root";
         private static final String PASSWORD = "Asik2002$$$$";
 
-        public static Connection getConnection() throws SQLException {
+        public static Connection getConnection() throws SQLException{
             return DriverManager.getConnection(JDBC_URL, USER, PASSWORD);
         }
     }
