@@ -1,21 +1,19 @@
 package org.example;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Timestamp;
+import java.sql.*;
+import java.time.LocalTime;
 
 public class AttendanceUpdater {
-    public static void updateAttendance(int empId, Timestamp loginTime, Timestamp logoutTime) {
+    public static void updateAttendance(int empId, LocalTime Time) {
 
-            String sql = "INSERT INTO Attendance (emp_id, login_time, logout_time) VALUES (?, ?, ?)";
+            String sql = "INSERT INTO Attendance (emp_id, login_time,logout_time) VALUES (?,?,?)";
             try  {
                 Connection connection = DBConnector.getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement(sql);
                 preparedStatement.setInt(1, empId);
-                preparedStatement.setTimestamp(2, loginTime);
-                preparedStatement.setTimestamp(3, logoutTime);
+
+                preparedStatement.setTime(2, java.sql.Time.valueOf(Time));
+               preparedStatement.setTime(3,java.sql.Time.valueOf(Time));
 
                 preparedStatement.executeUpdate();
 
