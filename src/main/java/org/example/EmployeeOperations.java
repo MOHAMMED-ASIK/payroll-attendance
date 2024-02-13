@@ -11,7 +11,6 @@ public class EmployeeOperations {
 
             preparedStatement.setInt(1, empId);
             preparedStatement.setString(2, empName);
-
             preparedStatement.executeUpdate();
 
             System.out.println("Employee record inserted successfully.");
