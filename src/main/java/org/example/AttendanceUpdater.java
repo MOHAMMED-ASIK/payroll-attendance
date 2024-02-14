@@ -25,12 +25,22 @@ public class AttendanceUpdater {
 
             // Insert the time into the appropriate column based on whether it's a login or logout time
             String insertSql;
+            long wh=0;
+            String s="";
             if (isLoginTime) {
                if( logintime.until(Time,ChronoUnit.MINUTES)<5){
                    System.out.println("Try again later");
                    System.exit(0);
                }
-                insertSql = "UPDATE Attendance SET logout_time = ? WHERE emp_id = ? AND logout_time IS NULL";
+                wh=logintime.until(Time,ChronoUnit.HOURS);
+                if (wh < 5)
+                {
+                    s="Half shift";
+                }
+                else
+                    s="Full shift";
+
+                insertSql = "UPDATE Attendance SET logout_time = ?,Total_working_hours =?,Shift=? WHERE emp_id = ? AND logout_time IS NULL";
             } else {
                 insertSql = "INSERT INTO Attendance (emp_id, login_time) VALUES (?, ?)";
             }
@@ -40,7 +50,9 @@ public class AttendanceUpdater {
 
                 if (isLoginTime) {
                     preparedStatement.setTime(1, java.sql.Time.valueOf(Time));
-                    preparedStatement.setInt(2, empId);
+                    preparedStatement.setLong(2,wh);
+                    preparedStatement.setString(3,s);
+                    preparedStatement.setInt(4,empId );
                 } else {
                     preparedStatement.setInt(1, empId);
                     preparedStatement.setTime(2, java.sql.Time.valueOf(Time));
