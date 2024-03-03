@@ -5,6 +5,10 @@ import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 
 public class AttendanceUpdater {
+
+
+
+
     public static void updateAttendance(int empId, LocalTime Time) {
             boolean isLoginTime = false;
             LocalTime logintime = null;
