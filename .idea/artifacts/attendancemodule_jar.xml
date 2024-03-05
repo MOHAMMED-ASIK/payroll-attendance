@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="attendancemodule:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/attendancemodule_jar</output-path>
+    <root id="archive" name="attendancemodule.jar">
+      <element id="module-output" name="attendancemodule" />
+    </root>
+  </artifact>
+</component>
